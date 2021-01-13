@@ -60,3 +60,12 @@ body{
 ul {
     list-style: none;
 }
+
+.modal {
+    position: fixed;
+}
+
+/*
+.col-sm-6 {
+    border-right: 1px dashed #333;
+}*/

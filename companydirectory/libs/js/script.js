@@ -33,15 +33,20 @@ $.ajax({ //GET ALL DEPARTMENTS
             var el = document.createElement("option");
             var el2 = document.createElement("option");
             var el3 = document.createElement("option");
+            var el4 = document.createElement("option");
+
             el.textContent = opt;
             el.value = opt;
             el2.textContent = opt;
             el2.value = val;
             el3.textContent = opt;
             el3.value = opt;
+            el4.textContent = opt;
+            el4.value = opt;
             departmentDropdown.appendChild(el); 
             newPersonnelDept.appendChild(el2);
             editPersonnelDept.appendChild(el3);
+            departmentEditDropdown.appendChild(el4);
         }
       // alert(result)
       departmentNames.forEach((departmentNames,i) => departmentsObj[departmentNames] = departmentIDsForobj[i]);
@@ -74,15 +79,29 @@ function getEveryone() {
                 for(var i = 0; i < result['data'].length; i++)
            {
 
+            /*
+               if(i%2 == 0){
+                   var row = i;
+               }else{
+                   var row = i-1;
+            }*/
+            if(i%3 == 0){
+                var row = i;
+            }else if(i%3 == 1){
+                var row = i-1;
+         }else{
+            var row = i-2;
+         }
+
             const removeable = document.createElement('div');
             removeable.id = 'removeable';
 
             const div = document.createElement('div');
             div.className = 'row';
-            div.id = 'first'+ i;
+            div.id = 'first'+ row;
             
             const div_2 = document.createElement('div');
-            div_2.className = 'col-sm-6';
+            div_2.className = 'col-sm-4';
             div_2.id = 'second'+ i;
 
             const div_3 = document.createElement('div');
@@ -141,7 +160,7 @@ function getEveryone() {
 
             document.getElementById('content').appendChild(removeable);
             document.getElementById('removeable').appendChild(div);
-            document.getElementById('first'+i).appendChild(div_2);
+            document.getElementById('first'+row).appendChild(div_2);
             document.getElementById('second'+i).appendChild(div_3);
             document.getElementById('third'+i).appendChild(div_4);
             document.getElementById('fourth'+i).appendChild(div_5);
@@ -160,7 +179,7 @@ function getEveryone() {
             document.getElementById('sixth'+i).appendChild(infoButton);
             document.getElementById('fourth'+i).appendChild(line);
             
-            
+               
 
            }
 
@@ -300,12 +319,17 @@ function getEveryone() {
                             var val = result['data'][i]['id'];
                             var el = document.createElement("option");
                             var el2 = document.createElement("option");
+                            var el3 = document.createElement("option");
+
                             el.textContent = opt;
                             el.value = val;
                             el2.textContent = opt;
                             el2.value = val;
+                            el3.textContent = opt;
+                            el3.value = opt;
                             locationDropdown.appendChild(el); 
                             locationDropdown2.appendChild(el2);
+                            locationEditDropdown.appendChild(el3);
                             }
                         }
                         
@@ -563,6 +587,86 @@ function getEveryone() {
             
                 });
             });
+
+            editDepartmentSelect
+            $('#editDepartmentSelect').on('click', function() { //ADD NEW DEPARTMENT
+                //alert(document.getElementById("emailTxt").value)
+                document.getElementById("departmentOld").defaultValue = selectDepartmentForm.elements[0].value
+
+            
+                });
+
+            $('#editDepartment').on('click', function() { //ADD NEW DEPARTMENT
+                //alert(document.getElementById("emailTxt").value)
+                //document.getElementById("departmentOld").defaultValue = selectDepartmentForm.elements[0].value
+
+            $.ajax({ //retrieve country name based on users click
+        
+                url: "libs/php/editDepartment.php",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    department: editDepartmentForm.elements[0].value,
+                    departmentOld: editDepartmentForm.elements[1].value
+
+                }, 
+        
+                success: function(result) {
+                           
+                if (result.status.name == "ok") {
+                    
+                    
+                  // alert(result)
+                }
+                
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // your error code
+                    console.log(errorThrown)
+                } 
+                
+                    });
+                });
+
+                $('#editLocationSelect').on('click', function() { //ADD NEW DEPARTMENT
+                    //alert(document.getElementById("emailTxt").value)
+                    document.getElementById("locationOld").defaultValue = selectLocationForm.elements[0].value
+    
+                
+                    });
+    
+                $('#editLocation').on('click', function() { //ADD NEW DEPARTMENT
+                    //alert(document.getElementById("emailTxt").value)
+                    //document.getElementById("departmentOld").defaultValue = selectDepartmentForm.elements[0].value
+    
+                $.ajax({ //retrieve country name based on users click
+            
+                    url: "libs/php/editLocation.php",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        location: editLocationForm.elements[0].value,
+                        locationOld: editLocationForm.elements[1].value
+    
+                    }, 
+            
+                    success: function(result) {
+                               
+                    if (result.status.name == "ok") {
+                        
+                        
+                      // alert(result)
+                    }
+                    
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // your error code
+                        console.log(errorThrown)
+                    } 
+                    
+                        });
+                    });
+            
     
             $('#searchField').on('input', function() { //Search Input Field
                 //alert(document.getElementById("emailTxt").value)
@@ -587,16 +691,22 @@ function getEveryone() {
 
                 for(var i = 0; i < result['data'].length; i++)
            {
-
+            if(i%3 == 0){
+                var row = i;
+            }else if(i%3 == 1){
+                var row = i-1;
+         }else{
+            var row = i-2;
+         }
             const removeable = document.createElement('div');
             removeable.id = 'removeable';
 
             const div = document.createElement('div');
             div.className = 'row';
-            div.id = 'first'+ i;
+            div.id = 'first'+ row;
             
             const div_2 = document.createElement('div');
-            div_2.className = 'col-sm-6';
+            div_2.className = 'col-sm-4';
             div_2.id = 'second'+ i;
 
             const div_3 = document.createElement('div');
@@ -655,7 +765,7 @@ function getEveryone() {
            
             document.getElementById('content').appendChild(removeable);
             document.getElementById('removeable').appendChild(div);
-            document.getElementById('first'+i).appendChild(div_2);
+            document.getElementById('first'+row).appendChild(div_2);
             document.getElementById('second'+i).appendChild(div_3);
             document.getElementById('third'+i).appendChild(div_4);
             document.getElementById('fourth'+i).appendChild(div_5);
@@ -669,7 +779,7 @@ function getEveryone() {
             document.getElementById('fifth'+i).appendChild(div_6);
             document.getElementById('sixth'+i).appendChild(bigName);
             document.getElementById('sixth'+i).appendChild(place);
-            document.getElementById('sixth'+i).appendChild(email);
+            //document.getElementById('sixth'+i).appendChild(email);
             
             document.getElementById('sixth'+i).appendChild(infoButton);
             document.getElementById('fourth'+i).appendChild(line);
