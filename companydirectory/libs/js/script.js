@@ -36,7 +36,7 @@ $.ajax({ //GET ALL DEPARTMENTS
             var el4 = document.createElement("option");
 
             el.textContent = opt;
-            el.value = opt;
+            el.value = val;
             el2.textContent = opt;
             el2.value = val;
             el3.textContent = opt;
@@ -270,8 +270,11 @@ function getEveryone() {
             
                 });
             }
-        
-            getEveryone()
+
+            $(document).ready(function() {
+                getEveryone()
+
+            });
 
                 $('#newDepartmentForm').submit(function() { //ADD NEW DEPARTMENT
                     var formData = document.getElementById("newDepartmentForm");
@@ -342,27 +345,29 @@ function getEveryone() {
                             });
     
                             $('#deleteDepartment').on('click', function() { //DELETE LOCATION
-                                var formData = document.getElementById("newDepartmentForm");
+                                //var formData = document.getElementById("newDepartmentForm");
                                 //console.log(departmentNames)
                                 $.ajax({ //GET ALL DEPARTMENTS
 
-                                    url: "libs/php/getAll.php",
+                                    url: "libs/php/containsEmployees.php",
                                     type: 'POST',
                                     dataType: 'json',
-                                    
+                                    data: {
+                                        departmentName: deleteDepartmentForm.elements[0].value
+                                    },
+
                                     success: function(result) {
                                                
                                     if (result.status.name == "ok") {
-                                        departmentIDs = [];
-                                        for(var i = 0; i < result['data'].length; i++){
-                                            departmentIDs.push(result['data'][i]['department'])
-                                        }
-                                        if(departmentIDs.includes(deleteDepartmentForm.elements[0].value)){
-                                            alert("Department has employees")
+                                        console.log(result['data'].length)
+                                        if(result['data'].length != 0){
+                                            $('#deleteErrorModal').modal('show')
                                         }else{
 
                                             $('#deleteDepartmentRealModal').modal('show')
                                         }
+
+                                    
                                     }
                                     
                                     },
@@ -386,7 +391,7 @@ function getEveryone() {
                                 type: 'POST',
                                 dataType: 'json',
                                 data: {
-                                    id: IDiThink
+                                    id: deleteDepartmentForm.elements[0].value
                                 },
             
                                 success: function(result) {
@@ -411,13 +416,23 @@ function getEveryone() {
                                     //alert(deleteLocationForm.elements[0].value)
                                     $.ajax({ //GET ALL DEPARTMENTS
     
-                                        url: "libs/php/getAllDepartments.php",
+                                        url: "libs/php/containsDepartments.php",
                                         type: 'POST',
                                         dataType: 'json',
-                                        
+                                        data: {
+                                            locationID: deleteLocationForm.elements[0].value
+                                        },
                                         success: function(result) {
                                                    
                                         if (result.status.name == "ok") {
+
+                                            if(result['data'].length != 0){
+                                                $('#deleteErrorModal').modal('show')
+                                            }else{
+    
+                                                $('#deleteLocationRealModal').modal('show')
+                                            }
+                                            /*
                                             locationIDs = [];
                                             for(var i = 0; i < result['data'].length; i++){
                                                 locationIDs.push(result['data'][i]['locationID'])
@@ -427,6 +442,7 @@ function getEveryone() {
                                             }else{
                                                 $('#deleteLocationRealModal').modal('show')
                                             }
+                                            */
                                         }
                                         
                                         },
@@ -588,7 +604,7 @@ function getEveryone() {
                 });
             });
 
-            editDepartmentSelect
+            
             $('#editDepartmentSelect').on('click', function() { //ADD NEW DEPARTMENT
                 //alert(document.getElementById("emailTxt").value)
                 document.getElementById("departmentOld").defaultValue = selectDepartmentForm.elements[0].value
@@ -797,7 +813,7 @@ function getEveryone() {
 
               var buttonId = this.id;
               var buttonNum = buttonId.substring(10)
-              $('#infoTitle').html(result['data'][buttonNum]['firstName'] + ' ' + result['data'][buttonNum]['lastName']);
+              $('#infoTitle2').html(result['data'][buttonNum]['firstName'] + ' ' + result['data'][buttonNum]['lastName']);
               $('#departmentTxt').html(result['data'][buttonNum]['department']);
                 $('#roleTxt').html(result['data'][buttonNum]['jobTitle']);
                 $('#locationTxt').html(result['data'][buttonNum]['location']);
@@ -874,6 +890,20 @@ function getEveryone() {
                 });
             }
                 });
+
+
+    var scrollToTopBtn = document.getElementById("scrollToTopBtn")
+    var rootElement = document.documentElement
+
+    function scrollToTop() {
+        // scroll to top logic
+        rootElement.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          })
+      }
+      
+      scrollToTopBtn.addEventListener("click", scrollToTop)   
 
 
 //day 1 get sql working

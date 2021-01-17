@@ -4,13 +4,17 @@
 
 <head>
 
-  <title>Portfolio 2</title>
+  <title>Company Directory</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Favicons -->
+    <link href="libs/img/favicon.svg" rel="icon">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="libs/css/index.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -27,23 +31,18 @@
 <div class="container bootstrap snippets bootdey" id='content'>
     <!--Start of Navbar-->
  <div nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-    <!--
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
-        filter
-      </button>
-    -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+      <button type="button" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#createModal">
         New
       </button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editThingModal">
+      <button type="button" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#editThingModal">
         Edit
       </button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
+      <button type="button" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#deleteModal">
         Delete
       </button>
     
       <form class="form-inline my-2 my-lg-0" id="searchForm">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search First OR Last Name" aria-label="Search" id="searchField">
+        <input class="form-control mr-sm-2" type="search" placeholder="search first or last name" aria-label="Search" id="searchField">
         <!--<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="search">Search</button>-->
       </form>
     </div>
@@ -81,10 +80,10 @@
               </button>
             </div>
             <div class="modal-body">
-              <ul>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createpersonnel">Employee</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createdepartment">Department</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createlocation">Location</button>
+              <ul class= "create-list">
+                <button type="button" class="btn btn-primary btn-new" data-toggle="modal" data-target="#createpersonnel">Employee</button>
+                <button type="button" class="btn btn-primary btn-new" data-toggle="modal" data-target="#createdepartment">Department</button>
+                <button type="button" class="btn btn-primary btn-new" data-toggle="modal" data-target="#createlocation">Location</button>
 
               </ul>
             </div>
@@ -108,7 +107,7 @@
               <form id='newDepartmentForm'>
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Name</label>
-                  <input type="text" class="form-control" id="newDepartmentName" name="newDepartmentName" placeholder="New Department" required>
+                  <input type="text" class="form-control" id="newDepartmentName" name="newDepartmentName" placeholder="new department" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Select Location</label>
@@ -140,7 +139,7 @@
         <form id='newLocationForm'>
           <div class="form-group">
             <label for="exampleFormControlInput1">Name</label>
-            <input type="text" class="form-control" id="newLocationName" name="newLocationName" placeholder="New Location" required>
+            <input type="text" class="form-control" id="newLocationName" name="newLocationName" placeholder="new location" required>
           </div>
           <button type="submit" class="btn btn-primary" id="addLocation">Submit</button>
         </form>
@@ -166,19 +165,19 @@
         <form id='newPersonnelForm'>
           <div class="form-group">
             <label for="exampleFormControlInput1">First Name</label>
-            <input type="text" class="form-control" id="newFirstName" name="newFirstName" placeholder="Enter First Name" required>
+            <input type="text" class="form-control" id="newFirstName" name="newFirstName" placeholder="enter first name" required>
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Last Name</label>
-            <input type="text" class="form-control" id="newLastName" name="newLastName" placeholder="Enter First Name" required>
+            <input type="text" class="form-control" id="newLastName" name="newLastName" placeholder="enter last name" required>
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Job Title</label>
-            <input type="text" class="form-control" id="newJobTitle" name="newJobTitle" placeholder="Enter Job Title">
+            <input type="text" class="form-control" id="newJobTitle" name="newJobTitle" placeholder="enter job title">
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Email Address</label>
-            <input type="email" class="form-control" id="newEmail" name="newEmail" placeholder="Enter Email Address" required>
+            <input type="email" class="form-control" id="newEmail" name="newEmail" placeholder="enter email address" required>
           </div>
           <div class="form-group">
             <label for="exampleFormControlSelect1">Department</label>
@@ -209,10 +208,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <ul>
+        <ul class= "create-list">
           
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deletedepartment">Department</button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteLocationModal">Location</button>
+          <button type="button" class="btn btn-primary btn-new" data-toggle="modal" data-target="#deletedepartment">Department</button>
+          <button type="button" class="btn btn-primary btn-new" data-toggle="modal" data-target="#deleteLocationModal">Location</button>
 
         </ul>
       </div>
@@ -403,10 +402,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <ul>
+        <ul class= "create-list">
           
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editdepartmentSelect">Department</button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editlocationSelect">Location</button>
+          <button type="button" class="btn btn-primary btn-new" data-toggle="modal" data-target="#editdepartmentSelect">Department</button>
+          <button type="button" class="btn btn-primary btn-new" data-toggle="modal" data-target="#editlocationSelect">Location</button>
 
         </ul>
       </div>
@@ -596,19 +595,22 @@
   </div>
 </div>
 
-<!--Action Successful modal-->
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!--Delete Error modal-->
+<div class="modal fade" id="deleteErrorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModal">person delete</h5>
+        <h5 class="modal-title" id="successModal">Unable to Delete</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
+      <div class="modal-body">
+        Item dependancies must be deleted
+      </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-dismiss="modal" value="refresh" refresh>successful delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
       </div>
     </div>
@@ -828,7 +830,10 @@
 
     </div>
     
-
+    <footer>
+      <!-- Scroll to top button -->
+      <button id="scrollToTopBtn">☝️</button>
+    </footer>
 
 <!--<script src="libs/js/jquery.js"></script>-->
 <script src="libs/js/script.js"></script>
