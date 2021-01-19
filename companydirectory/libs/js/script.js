@@ -3,7 +3,20 @@ var departmentNames = []
 var departmentIDsForobj = []
 var departmentsObj = {}
 
-$.ajax({ //GET ALL DEPARTMENTS
+
+
+ /*Scroll to top when arrow up clicked BEGIN*/
+ $(window).scroll(function() {
+    var height = $(window).scrollTop();
+    if (height > 100) {
+        $('#back2Top').fadeIn();
+    } else {
+        $('#back2Top').fadeOut();
+    }
+});
+ /*Scroll to top when arrow up clicked END*/
+
+ $.ajax({ //GET ALL DEPARTMENTS
     
     url: "libs/php/getAllDepartments.php",
     type: 'POST',
@@ -272,6 +285,11 @@ function getEveryone() {
             }
 
             $(document).ready(function() {
+                $("#back2Top").click(function(event) {
+                    event.preventDefault();
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    return false;
+                });
                 getEveryone()
 
             });
@@ -892,18 +910,6 @@ function getEveryone() {
                 });
 
 
-    var scrollToTopBtn = document.getElementById("scrollToTopBtn")
-    var rootElement = document.documentElement
-
-    function scrollToTop() {
-        // scroll to top logic
-        rootElement.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          })
-      }
-      
-      scrollToTopBtn.addEventListener("click", scrollToTop)   
 
 
 //day 1 get sql working
